@@ -41,29 +41,6 @@
   .fade-up{opacity:0;transform:translateY(28px);transition:opacity .9s ease,transform .9s ease;}
   .fade-up.in{opacity:1;transform:translateY(0);}
 
-  /* ===== ENTRY GATE ===== */
-  #gate{
-    position:fixed;inset:0;z-index:999;
-    background:
-      radial-gradient(circle at 30% 20%, rgba(198,153,79,0.18), transparent 55%),
-      radial-gradient(circle at 75% 80%, rgba(181,87,59,0.22), transparent 55%),
-      var(--cream);
-    display:flex;align-items:center;justify-content:center;
-    transition:opacity 1s ease, visibility 1s ease;
-  }
-  #gate.hide{opacity:0;visibility:hidden;pointer-events:none;}
-  .gate-inner{text-align:center;padding:40px;}
-  .gate-inner .eyebrow{display:block;margin-bottom:18px;}
-  .gate-names{font-family:'Cinzel',serif;font-size:clamp(28px,5vw,46px);color:var(--rust-dark);}
-  .gate-amp{font-family:'Allura',cursive;font-size:clamp(34px,6vw,56px);color:var(--gold);display:block;margin:6px 0;}
-  .gate-date{font-family:'Jost',sans-serif;font-weight:600;letter-spacing:3px;margin-top:22px;color:var(--ink-soft);font-size:14px;text-transform:uppercase;}
-  .enter-btn{
-    margin-top:38px;border:2px solid var(--rust);background:transparent;color:var(--rust-deep);
-    padding:14px 40px;font-size:13px;letter-spacing:3px;text-transform:uppercase;font-weight:700;
-    border-radius:2px;transition:all .35s ease;
-  }
-  .enter-btn:hover{background:var(--rust);color:#fff;}
-
   /* ===== HERO ===== */
   #hero{
     min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;
@@ -242,16 +219,6 @@
 </style>
 </head>
 <body>
-
-<!-- GATE -->
-<div id="gate">
-  <div class="gate-inner">
-    <span class="eyebrow">Together with their families</span>
-    <div class="gate-names">Mark Aldrin Manilag <span class="gate-amp">&amp;</span> Nicole Mae Efren</div>
-    <div class="gate-date">October 23, 2026 &nbsp;•&nbsp; The Pavilion at Watergate</div>
-    <button class="enter-btn" onclick="openInvite()">Open Invitation</button>
-  </div>
-</div>
 
 <!-- HERO -->
 <section id="hero">
@@ -628,21 +595,10 @@
 </section>
 
 <footer>
-  <div class="foot-names">Mark Aldrin Manilag &amp; Nicole Mae Efren</div>
-  <div>October 23, 2026 &nbsp;•&nbsp; The Pavilion at Watergate</div>
-  <div class="foot-tag">#MARKsthespotforNICOLE &nbsp;•&nbsp; #MARKedforNicole</div>
-  <div class="credit">Crafted with love by <a href="#" target="_blank">Love, Anne</a> &nbsp;|&nbsp; @loveanne.ph</div>
+  <div class="credit">Crafted with love by <a href="#" target="_blank">Love, Anne</a> &nbsp;|&nbsp; 🌐<a href="https://loveanneofficial.ph" target="_blank">loveanneofficial.ph</a></div>
 </footer>
 
 <script>
-  // Gate open
-  function openInvite(){
-    document.getElementById('gate').classList.add('hide');
-    document.body.style.overflow='auto';
-    revealOnScroll();
-  }
-  document.body.style.overflow='hidden';
-
   // Fade-up reveal on scroll
   function revealOnScroll(){
     const els = document.querySelectorAll('.fade-up');
@@ -651,6 +607,7 @@
     },{threshold:0.15});
     els.forEach(el=>obs.observe(el));
   }
+  revealOnScroll();
   document.querySelector('.hero-frame').classList.add('in');
 
   // Countdown to Oct 23, 2026 4:00 PM Philippine Time (UTC+8)
