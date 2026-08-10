@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mark & Nicole | October 23, 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800&family=Cormorant+Garamond:wght@600;700&family=Jost:wght@500;600;700&family=Allura&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FBF4EC;
+    --cream-2:#F6ECDF;
+    --card:#FFFBF6;
+    --rust:#B5573B;
+    --rust-deep:#8A3E2A;
+    --rust-dark:#5F2C1F;
+    --gold:#C6994F;
+    --ink:#3B2A22;
+    --ink-soft:#6E5348;
+    --line: rgba(138,62,42,0.22);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Cormorant Garamond',serif;
+    font-weight:700;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,h4{font-family:'Cinzel',serif;font-weight:700;color:var(--rust-dark);letter-spacing:1px;}
+  .eyebrow{font-family:'Jost',sans-serif;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--rust);font-size:13px;}
+  .script{font-family:'Allura',cursive;font-weight:400;color:var(--rust-deep);}
+  a{color:inherit;text-decoration:none;}
+  button{font-family:'Jost',sans-serif;cursor:pointer;}
+  section{padding:100px 20px;position:relative;}
+  .wrap{max-width:1080px;margin:0 auto;}
+  .center{text-align:center;}
+  .divider{width:70px;height:2px;background:var(--gold);margin:22px auto;}
+  .fade-up{opacity:0;transform:translateY(28px);transition:opacity .9s ease,transform .9s ease;}
+  .fade-up.in{opacity:1;transform:translateY(0);}
+
+  /* ===== ENTRY GATE ===== */
+  #gate{
+    position:fixed;inset:0;z-index:999;
+    background:
+      radial-gradient(circle at 30% 20%, rgba(198,153,79,0.18), transparent 55%),
+      radial-gradient(circle at 75% 80%, rgba(181,87,59,0.22), transparent 55%),
+      var(--cream);
+    display:flex;align-items:center;justify-content:center;
+    transition:opacity 1s ease, visibility 1s ease;
+  }
+  #gate.hide{opacity:0;visibility:hidden;pointer-events:none;}
+  .gate-inner{text-align:center;padding:40px;}
+  .gate-inner .eyebrow{display:block;margin-bottom:18px;}
+  .gate-names{font-family:'Cinzel',serif;font-size:clamp(28px,5vw,46px);color:var(--rust-dark);}
+  .gate-amp{font-family:'Allura',cursive;font-size:clamp(34px,6vw,56px);color:var(--gold);display:block;margin:6px 0;}
+  .gate-date{font-family:'Jost',sans-serif;font-weight:600;letter-spacing:3px;margin-top:22px;color:var(--ink-soft);font-size:14px;text-transform:uppercase;}
+  .enter-btn{
+    margin-top:38px;border:2px solid var(--rust);background:transparent;color:var(--rust-deep);
+    padding:14px 40px;font-size:13px;letter-spacing:3px;text-transform:uppercase;font-weight:700;
+    border-radius:2px;transition:all .35s ease;
+  }
+  .enter-btn:hover{background:var(--rust);color:#fff;}
+
+  /* ===== HERO ===== */
+  #hero{
+    min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;
+    background:
+      radial-gradient(circle at 15% 10%, rgba(198,153,79,0.16), transparent 50%),
+      radial-gradient(circle at 85% 85%, rgba(181,87,59,0.20), transparent 50%),
+      var(--cream);
+    padding:60px 20px;
+  }
+  .hero-frame{border:1px solid var(--line);padding:60px 36px;max-width:640px;}
+  .hero-eyebrow{font-family:'Jost',sans-serif;letter-spacing:3px;text-transform:uppercase;font-size:13px;color:var(--ink-soft);margin-bottom:26px;}
+  .hero-names{font-family:'Cinzel',serif;font-size:clamp(30px,5.2vw,50px);line-height:1.3;color:var(--rust-dark);}
+  .hero-amp{font-family:'Allura',cursive;font-size:clamp(38px,7vw,64px);color:var(--gold);display:block;margin:10px 0;}
+  .hero-date{margin-top:30px;font-family:'Jost',sans-serif;font-weight:600;letter-spacing:2px;color:var(--rust);font-size:16px;text-transform:uppercase;}
+  .hero-venue{margin-top:8px;font-family:'Cormorant Garamond',serif;font-weight:600;color:var(--ink-soft);font-size:18px;}
+
+  /* ===== OUR WEDDING ===== */
+  .intro-msg{font-size:clamp(19px,2.4vw,23px);line-height:1.85;color:var(--ink-soft);font-weight:600;max-width:680px;margin:0 auto;}
+
+  /* ===== COUNTDOWN ===== */
+  #countdown{background:var(--rust-dark);color:#fff;}
+  #countdown h2{color:#fff;}
+  #countdown .eyebrow{color:var(--gold);}
+  .cd-grid{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin-top:44px;}
+  .cd-box{
+    background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.18);
+    width:120px;padding:22px 10px;border-radius:4px;
+  }
+  .cd-num{font-family:'Cinzel',serif;font-size:clamp(30px,4vw,42px);color:var(--gold);}
+  .cd-label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;margin-top:6px;color:#EAD9C2;}
+  .cd-done{font-family:'Cinzel',serif;font-size:24px;color:var(--gold);margin-top:30px;}
+
+  /* ===== DETAILS ===== */
+  .details-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:50px;}
+  @media(max-width:680px){.details-grid{grid-template-columns:1fr;}}
+  .detail-card{
+    background:var(--card);border:1px solid var(--line);border-radius:6px;padding:44px 30px;text-align:center;
+    box-shadow:0 14px 30px rgba(95,44,31,0.06);
+  }
+  .detail-card h3{font-size:22px;}
+  .detail-card .place{font-size:20px;font-weight:700;color:var(--ink);margin:16px 0 6px;}
+  .detail-card .when{font-family:'Jost',sans-serif;font-weight:600;letter-spacing:1px;color:var(--ink-soft);font-size:14px;text-transform:uppercase;}
+  .map-btn{
+    display:inline-block;margin-top:22px;border:1.5px solid var(--rust);color:var(--rust-deep);
+    padding:10px 26px;border-radius:2px;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:700;
+    transition:all .3s ease;
+  }
+  .map-btn:hover{background:var(--rust);color:#fff;}
+  .placeholder-note{margin-top:20px;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:1px;color:var(--ink-soft);font-style:normal;}
+
+  /* ===== TIMELINE ===== */
+  #timeline{background:var(--cream-2);}
+  .tl{max-width:640px;margin:60px auto 0;position:relative;}
+  .tl::before{content:'';position:absolute;left:70px;top:0;bottom:0;width:2px;background:var(--line);}
+  .tl-item{display:flex;gap:26px;position:relative;padding-bottom:38px;}
+  .tl-time{width:70px;flex-shrink:0;text-align:right;font-family:'Jost',sans-serif;font-weight:700;color:var(--rust);font-size:14px;padding-right:20px;}
+  .tl-dot{position:absolute;left:65px;top:4px;width:12px;height:12px;border-radius:50%;background:var(--gold);border:2px solid var(--cream-2);}
+  .tl-text{padding-left:20px;font-family:'Jost',sans-serif;font-weight:600;font-size:17px;color:var(--ink);padding-top:1px;}
+
+  /* ===== ENTOURAGE ===== */
+  .ent-block{margin-top:60px;}
+  .ent-title{font-family:'Jost',sans-serif;font-weight:700;letter-spacing:2px;text-transform:uppercase;font-size:14px;color:var(--rust);text-align:center;margin-bottom:26px;}
+  .ent-parents{display:grid;grid-template-columns:1fr 1fr;gap:30px;max-width:640px;margin:0 auto;text-align:center;}
+  @media(max-width:600px){.ent-parents{grid-template-columns:1fr;gap:36px;}}
+  .ent-parents h4{font-size:15px;color:var(--ink-soft);font-family:'Jost',sans-serif;letter-spacing:1px;margin-bottom:10px;text-transform:uppercase;}
+  .ent-parents p{font-size:19px;color:var(--ink);}
+  .sponsors-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;max-width:820px;margin:0 auto;}
+  @media(max-width:640px){.sponsors-grid{grid-template-columns:1fr;}}
+  .sponsor-col h5{text-align:center;font-family:'Jost',sans-serif;font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;}
+  .sponsor-col ul{list-style:none;text-align:center;}
+  .sponsor-col li{font-size:17px;padding:5px 0;color:var(--ink);}
+  .role-single{text-align:center;font-size:19px;color:var(--ink);margin-top:8px;}
+  .party-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;max-width:760px;margin:0 auto;}
+  @media(max-width:600px){.party-grid{grid-template-columns:1fr;}}
+  .party-col h5{text-align:center;font-family:'Jost',sans-serif;font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;}
+  .party-col ul{list-style:none;text-align:center;}
+  .party-col li{font-size:17px;padding:5px 0;}
+  .bearers-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:26px;max-width:820px;margin:0 auto;text-align:center;}
+  .bearer-card h4{font-family:'Jost',sans-serif;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-soft);margin-bottom:8px;}
+  .bearer-card p{font-size:18px;color:var(--ink);}
+
+  /* ===== ATTIRE ===== */
+  #attire{background:var(--cream-2);}
+  .swatches{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin-top:44px;}
+  .swatch{width:84px;text-align:center;}
+  .swatch-color{width:84px;height:84px;border-radius:50%;box-shadow:0 8px 18px rgba(95,44,31,0.15);border:3px solid var(--card);}
+  .swatch-name{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:1px;color:var(--ink-soft);margin-top:10px;text-transform:uppercase;}
+  .attire-note{max-width:560px;margin:40px auto 0;text-align:center;font-size:18px;color:var(--ink-soft);}
+
+  /* ===== GIFT GUIDE ===== */
+  .gift-msg{max-width:640px;margin:0 auto;text-align:center;font-size:19px;line-height:1.85;color:var(--ink-soft);}
+  .gift-cards{display:grid;grid-template-columns:1fr 1fr;gap:26px;max-width:640px;margin:50px auto 0;}
+  @media(max-width:600px){.gift-cards{grid-template-columns:1fr;}}
+  .gift-card{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:34px 24px;text-align:center;}
+  .gift-card h4{font-family:'Jost',sans-serif;font-size:14px;letter-spacing:2px;text-transform:uppercase;color:var(--rust);margin-bottom:14px;}
+  .qr-box{
+    width:130px;height:130px;margin:16px auto 0;border:2px dashed var(--line);border-radius:6px;
+    display:flex;align-items:center;justify-content:center;font-family:'Jost',sans-serif;font-size:11px;
+    letter-spacing:1px;color:var(--ink-soft);text-align:center;padding:10px;
+  }
+
+  /* ===== GALLERY ===== */
+  #gallery{background:var(--cream-2);}
+  .gal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:50px;}
+  @media(max-width:700px){.gal-grid{grid-template-columns:repeat(2,1fr);}}
+  .gal-item{
+    aspect-ratio:1/1;border-radius:6px;background:linear-gradient(160deg,var(--rust) 0%,var(--rust-deep) 100%);
+    display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;cursor:pointer;
+    position:relative;overflow:hidden;transition:transform .4s ease;
+  }
+  .gal-item:hover{transform:scale(1.03);}
+  .gal-item span{font-family:'Jost',sans-serif;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;padding:0 12px;font-weight:700;}
+  .gal-item:nth-child(2n){background:linear-gradient(160deg,var(--gold) 0%,var(--rust) 100%);}
+  .gal-item:nth-child(3n){background:linear-gradient(160deg,var(--rust-deep) 0%,var(--rust-dark) 100%);}
+  #lightbox{
+    position:fixed;inset:0;background:rgba(59,42,34,0.94);z-index:1000;display:none;
+    align-items:center;justify-content:center;color:#fff;text-align:center;flex-direction:column;
+  }
+  #lightbox.show{display:flex;}
+  #lightbox .lb-label{font-family:'Cinzel',serif;font-size:22px;margin-bottom:10px;}
+  #lightbox .lb-sub{font-family:'Jost',sans-serif;font-size:13px;color:#EAD9C2;letter-spacing:1px;}
+  .lb-close{position:absolute;top:26px;right:32px;font-size:30px;cursor:pointer;color:#fff;background:none;border:none;}
+  .lb-nav{position:absolute;top:50%;transform:translateY(-50%);font-size:28px;background:none;border:none;color:#fff;cursor:pointer;padding:14px;}
+  .lb-prev{left:14px;}.lb-next{right:14px;}
+
+  /* ===== HASHTAG ===== */
+  #hashtag{text-align:center;}
+  .hashtag-box{
+    font-family:'Cinzel',serif;font-size:clamp(20px,3.2vw,30px);color:var(--rust-deep);
+    background:var(--card);border:1px solid var(--line);display:inline-block;padding:16px 30px;border-radius:6px;
+    margin:12px 10px;cursor:pointer;transition:background .3s ease;
+  }
+  .hashtag-box:hover{background:var(--cream-2);}
+  .copy-hint{font-family:'Jost',sans-serif;font-size:12px;color:var(--ink-soft);margin-top:8px;letter-spacing:1px;}
+
+  /* ===== RSVP ===== */
+  #rsvp{background:var(--rust-dark);color:#fff;text-align:center;}
+  #rsvp h2{color:#fff;}
+  #rsvp .eyebrow{color:var(--gold);}
+  #rsvp .gift-msg{color:#EAD9C2;}
+  .rsvp-btn{
+    display:inline-block;margin-top:36px;background:var(--gold);color:var(--rust-dark);
+    padding:18px 54px;border-radius:2px;font-family:'Jost',sans-serif;font-weight:700;letter-spacing:3px;
+    text-transform:uppercase;font-size:14px;transition:all .3s ease;border:2px solid var(--gold);
+  }
+  .rsvp-btn:hover{background:transparent;color:var(--gold);}
+  .rsvp-deadline{margin-top:22px;font-family:'Jost',sans-serif;font-size:13px;letter-spacing:1.5px;color:#EAD9C2;text-transform:uppercase;}
+
+  /* ===== CLOSING ===== */
+  #closing{text-align:center;padding-bottom:60px;}
+  .closing-names{font-family:'Allura',cursive;font-size:clamp(38px,7vw,60px);color:var(--rust-deep);}
+  .closing-msg{margin-top:20px;font-size:19px;color:var(--ink-soft);max-width:480px;margin-left:auto;margin-right:auto;}
+  .closing-tags{margin-top:20px;font-family:'Jost',sans-serif;font-size:13px;letter-spacing:1.5px;color:var(--rust);}
+
+  footer{
+    background:var(--rust-dark);color:#EAD9C2;text-align:center;padding:44px 20px 30px;
+    font-family:'Jost',sans-serif;font-size:13px;letter-spacing:1px;
+  }
+  footer .foot-names{font-family:'Cinzel',serif;color:#fff;font-size:17px;letter-spacing:1px;margin-bottom:8px;}
+  footer .foot-tag{margin-top:10px;color:var(--gold);}
+  footer .credit{margin-top:26px;font-size:11px;color:rgba(234,217,194,0.6);letter-spacing:1.5px;}
+  footer .credit a{color:var(--gold);}
+</style>
+</head>
+<body>
+
+<!-- GATE -->
+<div id="gate">
+  <div class="gate-inner">
+    <span class="eyebrow">Together with their families</span>
+    <div class="gate-names">Mark Aldrin Manilag <span class="gate-amp">&amp;</span> Nicole Mae Efren</div>
+    <div class="gate-date">October 23, 2026 &nbsp;•&nbsp; The Pavilion at Watergate</div>
+    <button class="enter-btn" onclick="openInvite()">Open Invitation</button>
+  </div>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-frame fade-up">
+    <div class="hero-eyebrow">Together with their families</div>
+    <div class="hero-names">Mark Aldrin Manilag<span class="hero-amp">&amp;</span>Nicole Mae Efren</div>
+    <div class="hero-date">October 23, 2026</div>
+    <div class="hero-venue">The Pavilion at Watergate</div>
+  </div>
+</section>
+
+<!-- OUR WEDDING -->
+<section id="our-wedding">
+  <div class="wrap center fade-up">
+    <span class="eyebrow">Our Wedding</span>
+    <h2 style="font-size:clamp(26px,3.6vw,38px);margin-top:14px;">Two Hearts, One Beautiful Beginning</h2>
+    <div class="divider"></div>
+    <p class="intro-msg">From two separate paths to one shared journey — Mark and Nicole are overjoyed to begin this new chapter together. Surrounded by the love of family and friends, they look forward to a celebration filled with joy, gratitude, and the promise of forever.</p>
+  </div>
+</section>
+
+<!-- COUNTDOWN -->
+<section id="countdown">
+  <div class="wrap center fade-up">
+    <span class="eyebrow">Counting Down To</span>
+    <h2 style="margin-top:14px;">October 23, 2026</h2>
+    <div id="cd-active">
+      <div class="cd-grid">
+        <div class="cd-box"><div class="cd-num" id="cd-days">00</div><div class="cd-label">Days</div></div>
+        <div class="cd-box"><div class="cd-num" id="cd-hours">00</div><div class="cd-label">Hours</div></div>
+        <div class="cd-box"><div class="cd-num" id="cd-mins">00</div><div class="cd-label">Minutes</div></div>
+        <div class="cd-box"><div class="cd-num" id="cd-secs">00</div><div class="cd-label">Seconds</div></div>
+      </div>
+    </div>
+    <div class="cd-done" id="cd-done" style="display:none;">The day we've been waiting for has arrived. ❤️</div>
+  </div>
+</section>
+
+<!-- DETAILS -->
+<section id="details">
+  <div class="wrap fade-up">
+    <div class="center">
+      <span class="eyebrow">Wedding Details</span>
+      <h2 style="margin-top:14px;">When &amp; Where</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="details-grid">
+      <div class="detail-card">
+        <h3>Ceremony</h3>
+        <div class="place">The Pavilion at Watergate</div>
+        <div class="when">October 23, 2026 &nbsp;•&nbsp; 4:00 PM</div>
+        <div class="placeholder-note">Location details to follow</div>
+        <a href="#" class="map-btn">View Location</a>
+      </div>
+      <div class="detail-card">
+        <h3>Reception</h3>
+        <div class="place">The Pavilion at Watergate</div>
+        <div class="when">October 23, 2026 &nbsp;•&nbsp; 6:30 PM</div>
+        <div class="placeholder-note">Location details to follow</div>
+        <a href="#" class="map-btn">View Location</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section id="timeline">
+  <div class="wrap center fade-up">
+    <span class="eyebrow">Timeline &amp; Program</span>
+    <h2 style="margin-top:14px;">Our Wedding Day</h2>
+    <div class="divider"></div>
+  </div>
+  <div class="tl fade-up">
+    <div class="tl-item"><div class="tl-time">3:45 PM</div><div class="tl-dot"></div><div class="tl-text">Entourage Line-up</div></div>
+    <div class="tl-item"><div class="tl-time">4:00 PM</div><div class="tl-dot"></div><div class="tl-text">Processional &amp; Ceremony Rites</div></div>
+    <div class="tl-item"><div class="tl-time">5:00 PM</div><div class="tl-dot"></div><div class="tl-text">Pronouncement</div></div>
+    <div class="tl-item"><div class="tl-time">5:30 PM</div><div class="tl-dot"></div><div class="tl-text">Cocktails &amp; Photobooth</div></div>
+    <div class="tl-item"><div class="tl-time">6:00 PM</div><div class="tl-dot"></div><div class="tl-text">Settling of Guests</div></div>
+    <div class="tl-item"><div class="tl-time">6:30 PM</div><div class="tl-dot"></div><div class="tl-text">Reception Program</div></div>
+    <div class="tl-item"><div class="tl-time">7:00 PM</div><div class="tl-dot"></div><div class="tl-text">Dinner</div></div>
+    <div class="tl-item"><div class="tl-time">7:30 PM</div><div class="tl-dot"></div><div class="tl-text">Cake Cutting &amp; Wine Toasting</div></div>
+    <div class="tl-item"><div class="tl-time">8:00 PM</div><div class="tl-dot"></div><div class="tl-text">End of Reception</div></div>
+    <div class="tl-item" style="padding-bottom:0;"><div class="tl-time">8:30 PM</div><div class="tl-dot"></div><div class="tl-text">Afterparty</div></div>
+  </div>
+</section>
+
+<!-- ENTOURAGE -->
+<section id="entourage">
+  <div class="wrap fade-up">
+    <div class="center">
+      <span class="eyebrow">Wedding Entourage</span>
+      <h2 style="margin-top:14px;">Those Who Stand With Us</h2>
+      <div class="divider"></div>
+    </div>
+
+    <div class="ent-block">
+      <div class="ent-title">Parents</div>
+      <div class="ent-parents">
+        <div>
+          <h4>Parents of the Groom</h4>
+          <p>Lorna G. Manilag</p>
+          <p>Edwin G. Manilag</p>
+        </div>
+        <div>
+          <h4>Parents of the Bride</h4>
+          <p>Alfreda A. Efren</p>
+          <p>Hartwell P. Efren</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ent-block">
+      <div class="ent-title">Principal Sponsors</div>
+      <div class="sponsors-grid">
+        <div class="sponsor-col">
+          <h5>Female Principal Sponsors</h5>
+          <ul>
+            <li>Dr. Charlene Flores-Lim</li>
+            <li>Dr. Mae Oco-Mateos</li>
+            <li>Dr. Lucille Pariñas</li>
+            <li>Dr. Rosemarie Ponce</li>
+            <li>Dr. Olib-Marchan</li>
+            <li>Mrs. Glady Mae E. Siega</li>
+            <li>Mrs. Eugenia Gamale</li>
+            <li>Mrs. Mary Rose Macuno</li>
+            <li>Mrs. Rizalina Timogan</li>
+            <li>Ms. Guendolyn Pelesco</li>
+            <li>Mrs. Milagros Blaisdell</li>
+            <li>Mrs. Imelda Caliwan</li>
+          </ul>
+        </div>
+        <div class="sponsor-col">
+          <h5>Male Principal Sponsors</h5>
+          <ul>
+            <li>Dr. Delfin Dayan</li>
+            <li>Mr. Resen Siega</li>
+            <li>Mr. Tirso Gamale</li>
+            <li>Engr. Reynante Macuno</li>
+            <li>Mr. Ronald N. Timogan</li>
+            <li>Engr. Christopher Garrido</li>
+            <li>Mr. Kenneth Blaisdell</li>
+            <li>Engr. Bernardo Caliwan</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="ent-block">
+      <div class="ent-title">Best Man &amp; Maid / Matron of Honor</div>
+      <div class="party-grid">
+        <div class="party-col">
+          <h5>Best Man</h5>
+          <ul>
+            <li>Garett Kris Allen M. Lumpay</li>
+            <li>Donnel Tapuro</li>
+          </ul>
+        </div>
+        <div class="party-col">
+          <h5>Maid &amp; Matron of Honor</h5>
+          <ul>
+            <li>Shekinah Kaye Siega — Maid of Honor</li>
+            <li>Kate Jessica Caliwan-Tapuro — Matron of Honor</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="ent-block">
+      <div class="ent-title">Groomsmen &amp; Bridesmaids</div>
+      <div class="party-grid">
+        <div class="party-col">
+          <h5>Groomsmen</h5>
+          <ul>
+            <li>Mark Jericho Manilag</li>
+            <li>Lorenze Valdehueza</li>
+            <li>Norman Jadumas</li>
+            <li>Sigfred Bunani</li>
+            <li>Prince Manilag</li>
+            <li>Mark Earvin Manilag</li>
+            <li>Joness Nemenzo</li>
+          </ul>
+        </div>
+        <div class="party-col">
+          <h5>Bridesmaids</h5>
+          <ul>
+            <li>Kimberly Macuno</li>
+            <li>Vanessa Mae Ellar</li>
+            <li>Christian Rose Llorente</li>
+            <li>Normasa Bato</li>
+            <li>Xanthea Lumpay</li>
+            <li>Janice Yncierto</li>
+            <li>Cedrick Lee Carmelo</li>
+            <li>Jay Anthony Boyonas</li>
+            <li>Carlo Padilla</li>
+            <li>Jovenita Gamale</li>
+            <li>Abegail Almenario</li>
+            <li>Maynalie Alarde</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="ent-block">
+      <div class="ent-title">Secondary Sponsors</div>
+      <div class="sponsors-grid">
+        <div class="sponsor-col">
+          <h5>Candle Sponsors</h5>
+          <p class="role-single">Details to follow</p>
+        </div>
+        <div class="sponsor-col">
+          <h5>Veil Sponsors</h5>
+          <ul>
+            <li>Sheryl Mae Leyrita-Ciencia</li>
+            <li>Ralph Jones Leyrita</li>
+          </ul>
+        </div>
+      </div>
+      <div style="margin-top:30px;">
+        <h5 style="text-align:center;font-family:'Jost',sans-serif;font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);">Cord Sponsors</h5>
+        <p class="role-single">Details to follow</p>
+      </div>
+    </div>
+
+    <div class="ent-block">
+      <div class="ent-title">Bearers &amp; Flower Girls</div>
+      <div class="bearers-grid">
+        <div class="bearer-card"><h4>Flower Girls</h4><p>Cerila Kaye Siega</p><p>Chloe F. Lim</p><p>Megan F. Lim</p></div>
+        <div class="bearer-card"><h4>Bible Bearer</h4><p>Samuel Makarios Efren</p></div>
+        <div class="bearer-card"><h4>Coin Bearer</h4><p>Ryan Bacalso</p></div>
+        <div class="bearer-card"><h4>Ring Bearer</h4><p>Liam Ares Manilag</p></div>
+        <div class="bearer-card"><h4>Banner Bearer</h4><p>Liam Ares Manilag</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ATTIRE -->
+<section id="attire">
+  <div class="wrap center fade-up">
+    <span class="eyebrow">Attire Guide</span>
+    <h2 style="margin-top:14px;">Dress Code</h2>
+    <div class="divider"></div>
+    <p class="attire-note">Our celebration is dressed in warm, earthy hues. We kindly invite our guests to complement our rust and terracotta palette below.</p>
+    <div class="swatches">
+      <div class="swatch"><div class="swatch-color" style="background:#B5573B;"></div><div class="swatch-name">Rust</div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#8A3E2A;"></div><div class="swatch-name">Terracotta</div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#C6994F;"></div><div class="swatch-name">Gold</div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#D8B48C;"></div><div class="swatch-name">Sand</div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#5F2C1F;"></div><div class="swatch-name">Espresso</div></div>
+    </div>
+    <p class="attire-note">Formal attire is encouraged. We kindly ask that our guests refrain from wearing white, ivory, or champagne, as these are reserved for the bride.</p>
+  </div>
+</section>
+
+<!-- GIFT GUIDE -->
+<section id="gifts">
+  <div class="wrap fade-up">
+    <div class="center">
+      <span class="eyebrow">Gift Guide</span>
+      <h2 style="margin-top:14px;">With Love, No Obligation</h2>
+      <div class="divider"></div>
+    </div>
+    <p class="gift-msg">The greatest gift is having you celebrate this special day with us. Your love, prayers, and presence are more than enough. However, if you were thinking of blessing us with a gift, a contribution toward our honeymoon fund would be truly appreciated and will help us create unforgettable memories together.</p>
+    <div class="gift-cards">
+      <div class="gift-card">
+        <h4>Bank Account</h4>
+        <p class="placeholder-note">Bank Account Details: To Follow</p>
+      </div>
+      <div class="gift-card">
+        <h4>E-Wallet / QR Code</h4>
+        <div class="qr-box">QR CODE<br>TO FOLLOW</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="wrap center fade-up">
+    <span class="eyebrow">Gallery</span>
+    <h2 style="margin-top:14px;">Moments We Cherish</h2>
+    <div class="divider"></div>
+  </div>
+  <div class="wrap">
+    <div class="gal-grid" id="gal-grid"></div>
+  </div>
+</section>
+
+<div id="lightbox">
+  <button class="lb-close" onclick="closeLB()">&times;</button>
+  <button class="lb-nav lb-prev" onclick="navLB(-1)">&#10094;</button>
+  <div class="lb-label" id="lb-label"></div>
+  <div class="lb-sub">Photo coming soon</div>
+  <button class="lb-nav lb-next" onclick="navLB(1)">&#10095;</button>
+</div>
+
+<!-- HASHTAG -->
+<section id="hashtag">
+  <div class="wrap fade-up">
+    <span class="eyebrow">Share Our Moments</span>
+    <h2 style="margin-top:14px;">Wedding Hashtag</h2>
+    <div class="divider"></div>
+    <div>
+      <span class="hashtag-box" onclick="copyTag('#MARKsthespotforNICOLE',this)">#MARKsthespotforNICOLE</span>
+      <span class="hashtag-box" onclick="copyTag('#MARKedforNicole',this)">#MARKedforNicole</span>
+    </div>
+    <div class="copy-hint">Tap a hashtag to copy it</div>
+    <p class="intro-msg" style="margin-top:26px;font-size:18px;">We'd love to see your favorite moments from our special day. Don't forget to use our wedding hashtags!</p>
+  </div>
+</section>
+
+<!-- RSVP -->
+<section id="rsvp">
+  <div class="wrap fade-up">
+    <span class="eyebrow">RSVP</span>
+    <h2 style="margin-top:14px;">Will You Celebrate With Us?</h2>
+    <div class="divider"></div>
+    <p class="gift-msg">Your presence is one of the greatest gifts we could receive. Kindly confirm your attendance by September 23, 2026.</p>
+    <a class="rsvp-btn" href="https://script.google.com/macros/s/AKfycbwBs4sZ8a7VUm_22VhFhAHaCPjXaBBaIxoffvkfAgYI_anO8QPetYz03efjDqEz1b0Pqg/exec" target="_blank" rel="noopener">RSVP Now</a>
+    <div class="rsvp-deadline">RSVP Deadline: September 23, 2026</div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section id="closing">
+  <div class="wrap fade-up">
+    <div class="closing-names">Mark &amp; Nicole</div>
+    <div class="hero-date" style="margin-top:10px;">October 23, 2026</div>
+    <p class="closing-msg">We can't wait to celebrate this beautiful beginning with you.</p>
+    <div class="closing-tags">#MARKsthespotforNICOLE &nbsp;•&nbsp; #MARKedforNicole</div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-names">Mark Aldrin Manilag &amp; Nicole Mae Efren</div>
+  <div>October 23, 2026 &nbsp;•&nbsp; The Pavilion at Watergate</div>
+  <div class="foot-tag">#MARKsthespotforNICOLE &nbsp;•&nbsp; #MARKedforNicole</div>
+  <div class="credit">Crafted with love by <a href="#" target="_blank">Love, Anne</a> &nbsp;|&nbsp; @loveanne.ph</div>
+</footer>
+
+<script>
+  // Gate open
+  function openInvite(){
+    document.getElementById('gate').classList.add('hide');
+    document.body.style.overflow='auto';
+    revealOnScroll();
+  }
+  document.body.style.overflow='hidden';
+
+  // Fade-up reveal on scroll
+  function revealOnScroll(){
+    const els = document.querySelectorAll('.fade-up');
+    const obs = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target);} });
+    },{threshold:0.15});
+    els.forEach(el=>obs.observe(el));
+  }
+  document.querySelector('.hero-frame').classList.add('in');
+
+  // Countdown to Oct 23, 2026 4:00 PM Philippine Time (UTC+8)
+  const target = new Date('2026-10-23T04:00:00+08:00').getTime();
+  function tickCountdown(){
+    const now = Date.now();
+    const diff = target - now;
+    if(diff <= 0){
+      document.getElementById('cd-active').style.display='none';
+      document.getElementById('cd-done').style.display='block';
+      clearInterval(cdInterval);
+      return;
+    }
+    const d = Math.floor(diff/(1000*60*60*24));
+    const h = Math.floor((diff/(1000*60*60))%24);
+    const m = Math.floor((diff/(1000*60))%60);
+    const s = Math.floor((diff/1000)%60);
+    document.getElementById('cd-days').textContent = String(d).padStart(2,'0');
+    document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
+    document.getElementById('cd-mins').textContent = String(m).padStart(2,'0');
+    document.getElementById('cd-secs').textContent = String(s).padStart(2,'0');
+  }
+  tickCountdown();
+  const cdInterval = setInterval(tickCountdown, 1000);
+
+  // Gallery placeholders
+  const galCategories = ['Engagement Photos','Couple Photos','Pre-Wedding Photos','Wedding Details','Family','Friends'];
+  const galGrid = document.getElementById('gal-grid');
+  galCategories.forEach((cat,i)=>{
+    const div = document.createElement('div');
+    div.className='gal-item';
+    div.innerHTML = '<span>'+cat+'</span>';
+    div.onclick = ()=>openLB(i);
+    galGrid.appendChild(div);
+  });
+
+  let lbIndex = 0;
+  function openLB(i){
+    lbIndex = i;
+    document.getElementById('lb-label').textContent = galCategories[i];
+    document.getElementById('lightbox').classList.add('show');
+  }
+  function closeLB(){ document.getElementById('lightbox').classList.remove('show'); }
+  function navLB(dir){
+    lbIndex = (lbIndex + dir + galCategories.length) % galCategories.length;
+    document.getElementById('lb-label').textContent = galCategories[lbIndex];
+  }
+  document.getElementById('lightbox').addEventListener('click', (e)=>{
+    if(e.target.id === 'lightbox') closeLB();
+  });
+
+  // Swipe support for lightbox
+  let touchStartX = 0;
+  const lb = document.getElementById('lightbox');
+  lb.addEventListener('touchstart', e=>{ touchStartX = e.changedTouches[0].screenX; });
+  lb.addEventListener('touchend', e=>{
+    const touchEndX = e.changedTouches[0].screenX;
+    if(touchEndX - touchStartX > 50) navLB(-1);
+    else if(touchStartX - touchEndX > 50) navLB(1);
+  });
+
+  // Copy hashtag
+  function copyTag(tag, el){
+    navigator.clipboard.writeText(tag).then(()=>{
+      const original = el.textContent;
+      el.textContent = 'Copied!';
+      setTimeout(()=>{ el.textContent = original; }, 1200);
+    });
+  }
+</script>
+</body>
+</html>
