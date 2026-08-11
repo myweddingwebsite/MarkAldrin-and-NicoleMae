@@ -60,20 +60,26 @@
     #navbar{padding:20px 24px;}
     #navbar.scrolled{padding:14px 24px;}
     .nav-links{
-      position:fixed;top:0;right:-280px;width:260px;height:100vh;background:var(--cream);
-      flex-direction:column;justify-content:center;align-items:center;gap:30px;
+      position:fixed;top:0;right:-280px;width:260px;height:100vh;
+      background-color:var(--cream);background-size:cover;background-position:center;
+      display:flex;flex-direction:column;justify-content:center;align-items:center;gap:30px;
       transition:right .4s ease;box-shadow:-10px 0 30px rgba(0,0,0,0.18);
     }
+    .nav-links::before{content:'';position:absolute;inset:0;background:rgba(251,244,236,0.90);z-index:0;}
+    .nav-links li{position:relative;z-index:1;}
     .nav-links.open{right:0;}
     .nav-links a{color:var(--ink)!important;}
     .nav-toggle{display:block;}
   }
 
   /* ===== SECTION PHOTO BACKGROUNDS ===== */
-  .section-photo{background-size:cover;background-position:center;}
+  .section-photo{background-size:cover;background-position:center;background-repeat:no-repeat;background-attachment:scroll;}
   .section-photo::before{content:'';position:absolute;inset:0;z-index:0;background:rgba(251,244,236,0.90);}
   #timeline.section-photo::before, #attire.section-photo::before{background:rgba(246,236,223,0.90);}
-  #countdown.section-photo::before, #rsvp.section-photo::before{background:rgba(95,44,31,0.84);}
+  #rsvp.section-photo::before{background:rgba(95,44,31,0.84);}
+  @media(max-width:860px){
+    .section-photo{background-size:cover;background-position:center;background-attachment:scroll;}
+  }
 
   /* ===== HERO ===== */
   #hero{
@@ -89,26 +95,20 @@
   .hero-amp{font-family:'Allura',cursive;font-size:clamp(38px,7vw,64px);color:var(--gold);display:block;margin:10px 0;}
   .hero-date{margin-top:30px;font-family:'Jost',sans-serif;font-weight:600;letter-spacing:2px;color:var(--gold);font-size:16px;text-transform:uppercase;}
   .hero-venue{margin-top:8px;font-family:'Cormorant Garamond',serif;font-weight:600;color:#F3E4D3;font-size:18px;}
+  .hero-cd{margin-top:36px;}
+  .hero-cd-grid{display:flex;justify-content:center;gap:10px;flex-wrap:nowrap;}
+  .hero-cd-box{
+    background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.28);
+    flex:1 1 0;min-width:0;max-width:92px;padding:14px 4px;border-radius:4px;
+  }
+  .hero-cd-num{font-family:'Cinzel',serif;font-size:clamp(18px,4.6vw,32px);color:var(--gold);white-space:nowrap;}
+  .hero-cd-label{font-family:'Jost',sans-serif;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;margin-top:4px;color:#F3E4D3;white-space:nowrap;}
+  .hero-cd-done{font-family:'Cinzel',serif;font-size:clamp(17px,3vw,22px);color:var(--gold);margin-top:10px;}
 
   /* ===== OUR WEDDING ===== */
   .intro-msg{font-size:clamp(19px,2.4vw,23px);line-height:1.85;color:var(--ink-soft);font-weight:600;max-width:680px;margin:0 auto;}
 
-  /* ===== COUNTDOWN ===== */
-  #countdown{background:var(--rust-dark);color:#fff;}
-  #countdown h2{color:#fff;}
-  #countdown .eyebrow{color:var(--gold);}
-  .cd-grid{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin-top:44px;}
-  .cd-box{
-    background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.18);
-    width:120px;padding:22px 10px;border-radius:4px;
-  }
-  .cd-num{font-family:'Cinzel',serif;font-size:clamp(30px,4vw,42px);color:var(--gold);}
-  .cd-label{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;margin-top:6px;color:#EAD9C2;}
-  .cd-done{font-family:'Cinzel',serif;font-size:24px;color:var(--gold);margin-top:30px;}
-
   /* ===== DETAILS ===== */
-  .details-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:50px;}
-  @media(max-width:680px){.details-grid{grid-template-columns:1fr;}}
   .detail-card{
     background:var(--card);border:1px solid var(--line);border-radius:6px;padding:44px 30px;text-align:center;
     box-shadow:0 14px 30px rgba(95,44,31,0.06);
@@ -273,6 +273,18 @@
     <div class="hero-names">Mark Aldrin Manilag<span class="hero-amp">&amp;</span>Nicole Mae Efren</div>
     <div class="hero-date">October 23, 2026</div>
     <div class="hero-venue">The Pavilion at Watergate</div>
+
+    <div class="hero-cd">
+      <div id="cd-active">
+        <div class="hero-cd-grid">
+          <div class="hero-cd-box"><div class="hero-cd-num" id="cd-days">00</div><div class="hero-cd-label">Days</div></div>
+          <div class="hero-cd-box"><div class="hero-cd-num" id="cd-hours">00</div><div class="hero-cd-label">Hours</div></div>
+          <div class="hero-cd-box"><div class="hero-cd-num" id="cd-mins">00</div><div class="hero-cd-label">Minutes</div></div>
+          <div class="hero-cd-box"><div class="hero-cd-num" id="cd-secs">00</div><div class="hero-cd-label">Seconds</div></div>
+        </div>
+      </div>
+      <div class="hero-cd-done" id="cd-done" style="display:none;">The day we've been waiting for has arrived. ❤️</div>
+    </div>
   </div>
 </section>
 
@@ -286,23 +298,6 @@
   </div>
 </section>
 
-<!-- COUNTDOWN -->
-<section id="countdown" class="section-photo">
-  <div class="wrap center fade-up">
-    <span class="eyebrow">Counting Down To</span>
-    <h2 style="margin-top:14px;">October 23, 2026</h2>
-    <div id="cd-active">
-      <div class="cd-grid">
-        <div class="cd-box"><div class="cd-num" id="cd-days">00</div><div class="cd-label">Days</div></div>
-        <div class="cd-box"><div class="cd-num" id="cd-hours">00</div><div class="cd-label">Hours</div></div>
-        <div class="cd-box"><div class="cd-num" id="cd-mins">00</div><div class="cd-label">Minutes</div></div>
-        <div class="cd-box"><div class="cd-num" id="cd-secs">00</div><div class="cd-label">Seconds</div></div>
-      </div>
-    </div>
-    <div class="cd-done" id="cd-done" style="display:none;">The day we've been waiting for has arrived. ❤️</div>
-  </div>
-</section>
-
 <!-- DETAILS -->
 <section id="details" class="section-photo">
   <div class="wrap fade-up">
@@ -311,20 +306,22 @@
       <h2 style="margin-top:14px;">When &amp; Where</h2>
       <div class="divider"></div>
     </div>
-    <div class="details-grid">
+    <div style="max-width:520px;margin:50px auto 0;">
       <div class="detail-card">
-        <h3>Ceremony</h3>
-        <div class="place">The Pavilion at Watergate</div>
-        <div class="when">October 23, 2026 &nbsp;•&nbsp; 4:00 PM</div>
-        <div class="placeholder-note">Location details to follow</div>
-        <a href="#" class="map-btn">View Location</a>
-      </div>
-      <div class="detail-card">
-        <h3>Reception</h3>
-        <div class="place">The Pavilion at Watergate</div>
-        <div class="when">October 23, 2026 &nbsp;•&nbsp; 6:30 PM</div>
-        <div class="placeholder-note">Location details to follow</div>
-        <a href="#" class="map-btn">View Location</a>
+        <h3>Ceremony &amp; Reception</h3>
+        <div class="place">The Pavilion at the Watergate</div>
+        <div class="when">October 23, 2026</div>
+        <div style="margin-top:20px;display:flex;justify-content:center;gap:36px;flex-wrap:wrap;">
+          <div>
+            <div style="font-family:'Jost',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);">Ceremony</div>
+            <div style="font-family:'Jost',sans-serif;font-weight:700;color:var(--ink);margin-top:4px;font-size:15px;">4:00 PM</div>
+          </div>
+          <div>
+            <div style="font-family:'Jost',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);">Reception</div>
+            <div style="font-family:'Jost',sans-serif;font-weight:700;color:var(--ink);margin-top:4px;font-size:15px;">6:30 PM</div>
+          </div>
+        </div>
+        <a href="https://www.google.com/maps/place/The+Pavilion+at+the+Watergate/@8.9505241,125.5261005,973m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3301c1d1dd7590b3:0x7840633b2e090768!8m2!3d8.9505241!4d125.5286754!16s%2Fg%2F11fq8jj_hm?entry=ttu&g_ep=EgoyMDI2MDgwNS4xIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener" class="map-btn">View Location</a>
       </div>
     </div>
   </div>
@@ -698,6 +695,7 @@
   photoSections.forEach((sec, i)=>{
     sec.style.backgroundImage = `url('${shuffledPool[i % shuffledPool.length]}')`;
   });
+  navLinksEl.style.backgroundImage = `url('${shuffledPool[Math.floor(Math.random() * shuffledPool.length)]}')`;
 
   // Countdown to Oct 23, 2026 4:00 PM Philippine Time (UTC+8)
   const target = new Date('2026-10-23T04:00:00+08:00').getTime();
