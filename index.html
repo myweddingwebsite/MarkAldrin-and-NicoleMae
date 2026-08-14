@@ -157,10 +157,7 @@
 
   /* ===== ATTIRE ===== */
   #attire{background:var(--cream-2);}
-  .swatches{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin-top:44px;}
-  .swatch{width:84px;text-align:center;}
-  .swatch-color{width:84px;height:84px;border-radius:50%;box-shadow:0 8px 18px rgba(95,44,31,0.15);border:3px solid var(--card);}
-  .swatch-name{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:1px;color:var(--ink-soft);margin-top:10px;text-transform:uppercase;}
+  .attire-photo{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:6px;margin-bottom:14px;box-shadow:0 12px 26px rgba(95,44,31,0.14);}
   .attire-note{max-width:560px;margin:40px auto 0;text-align:center;font-size:18px;color:var(--ink-soft);}
   .attire-groups{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:820px;margin:56px auto 0;}
   @media(max-width:680px){.attire-groups{grid-template-columns:1fr;}}
@@ -182,10 +179,11 @@
   @media(max-width:600px){.gift-cards{grid-template-columns:1fr;}}
   .gift-card{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:34px 24px;text-align:center;}
   .gift-card h4{font-family:'Jost',sans-serif;font-size:14px;letter-spacing:2px;text-transform:uppercase;color:var(--rust);margin-bottom:14px;}
-  .qr-box{
-    width:130px;height:130px;margin:16px auto 0;border:2px dashed var(--line);border-radius:6px;
-    display:flex;align-items:center;justify-content:center;font-family:'Jost',sans-serif;font-size:11px;
-    letter-spacing:1px;color:var(--ink-soft);text-align:center;padding:10px;
+  .gift-acct-name{font-size:15px;color:var(--ink);margin-bottom:4px;}
+  .gift-acct-num{font-size:15px;color:var(--ink-soft);margin-bottom:16px;}
+  .qr-img{
+    width:130px;height:130px;object-fit:contain;margin:0 auto;display:block;
+    border-radius:6px;border:1px solid var(--line);background:#fff;padding:6px;
   }
 
   /* ===== GALLERY ===== */
@@ -245,8 +243,8 @@
   }
   footer .foot-names{font-family:'Cinzel',serif;color:#fff;font-size:17px;letter-spacing:1px;margin-bottom:8px;}
   footer .foot-tag{margin-top:10px;color:var(--gold);}
-  footer .credit{margin-top:26px;font-size:11px;color:rgba(234,217,194,0.6);letter-spacing:1.5px;}
-  footer .credit a{color:var(--gold);}
+  .credit-block{margin-top:0;font-size:12px;color:rgba(234,217,194,0.85);letter-spacing:0.8px;line-height:1.9;}
+  .credit-block a{color:var(--gold);}
 </style>
 </head>
 <body>
@@ -466,11 +464,7 @@
 
     <div class="ent-block">
       <div class="ent-title">Secondary Sponsors</div>
-      <div class="sponsors-grid">
-        <div class="sponsor-col">
-          <h5>Candle Sponsors</h5>
-          <p class="role-single">Details to follow</p>
-        </div>
+      <div class="sponsors-grid" style="grid-template-columns:1fr;max-width:400px;">
         <div class="sponsor-col">
           <h5>Veil Sponsors</h5>
           <ul>
@@ -478,10 +472,6 @@
             <li>Ralph Jones Leyrita</li>
           </ul>
         </div>
-      </div>
-      <div style="margin-top:30px;">
-        <h5 style="text-align:center;font-family:'Jost',sans-serif;font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);">Cord Sponsors</h5>
-        <p class="role-single">Details to follow</p>
       </div>
     </div>
 
@@ -505,16 +495,6 @@
     <h2 style="margin-top:14px;">Dress Code</h2>
     <div class="divider"></div>
     <p class="attire-note">Our celebration is dressed in warm, earthy hues. We kindly invite our guests to complement our rust and terracotta palette below.</p>
-    <div class="swatches">
-      <div class="swatch"><div class="swatch-color" style="background:#A8492E;"></div><div class="swatch-name">Rust</div></div>
-      <div class="swatch"><div class="swatch-color" style="background:#C2653C;"></div><div class="swatch-name">Terracotta</div></div>
-      <div class="swatch"><div class="swatch-color" style="background:#C97A45;"></div><div class="swatch-name">Burnt Orange</div></div>
-      <div class="swatch"><div class="swatch-color" style="background:#D68C82;"></div><div class="swatch-name">Dusty Rose</div></div>
-      <div class="swatch"><div class="swatch-color" style="background:#E4CBA8;"></div><div class="swatch-name">Beige</div></div>
-      <div class="swatch"><div class="swatch-color" style="background:#B3A08E;"></div><div class="swatch-name">Taupe</div></div>
-      <div class="swatch"><div class="swatch-color" style="background:#9CA179;"></div><div class="swatch-name">Sage Green</div></div>
-      <div class="swatch"><div class="swatch-color" style="background:#FBF6EE;border:1px solid var(--line);"></div><div class="swatch-name">Cream</div></div>
-    </div>
 
     <div class="attire-groups">
       <div class="attire-card">
@@ -522,11 +502,15 @@
         <div class="attire-sub">
           <div class="attire-sub-col">
             <h4>Male</h4>
-            <p>Beige, taupe, brown, or dark brown suit, with rust or terracotta tie or accents</p>
+            <img class="attire-photo" src="https://ik.imagekit.io/jcsquo5nq/mark%20and%20nicole/principal%20male%20guest.jpg" alt="Principal sponsors male attire guide">
+            <p>Beige / Taupe, Brown, Dark Brown</p>
+            <div class="attire-sub-note">With rust / terracotta tie or accents</div>
           </div>
           <div class="attire-sub-col">
             <h4>Female</h4>
-            <p>Elegant gown or cocktail dress in champagne/beige, terracotta/rust, or dusty rose/mauve</p>
+            <img class="attire-photo" src="https://ik.imagekit.io/jcsquo5nq/mark%20and%20nicole/principal%20female%20guest.jpg" alt="Principal sponsors female attire guide">
+            <p>Champagne / Beige, Terracotta / Rust, Dusty Rose / Mauve</p>
+            <div class="attire-sub-note">Elegant gown or cocktail dresses</div>
           </div>
         </div>
       </div>
@@ -535,11 +519,15 @@
         <div class="attire-sub">
           <div class="attire-sub-col">
             <h4>Male</h4>
-            <p>Long sleeve, polo, or barong in beige, brown/terracotta, or sage green/olive</p>
+            <img class="attire-photo" src="https://ik.imagekit.io/jcsquo5nq/mark%20and%20nicole/male%20guest.jpg" alt="Other guests male attire guide">
+            <p>Beige, Brown / Terracotta, Sage Green / Olive</p>
+            <div class="attire-sub-note">Long sleeve / polo / barong in neutral or earth tones</div>
           </div>
           <div class="attire-sub-col">
             <h4>Female</h4>
-            <p>Dress in earthy, warm, or soft tones — beige/champagne, rust/terracotta, dusty rose/mauve, or sage green/olive</p>
+            <img class="attire-photo" src="https://ik.imagekit.io/jcsquo5nq/mark%20and%20nicole/female%20guest.jpg" alt="Other guests female attire guide">
+            <p>Beige / Champagne, Terracotta / Rust, Dusty Rose / Mauve, Sage Green / Olive</p>
+            <div class="attire-sub-note">Dresses in earthy, warm, or soft tones — avoid bright colors</div>
           </div>
         </div>
       </div>
@@ -554,7 +542,7 @@
       </ul>
     </div>
 
-    <p class="attire-note">Formal attire is encouraged. We kindly ask that our guests refrain from wearing white, ivory, or champagne gowns, as these are reserved for the bride.</p>
+    <p class="attire-note">Formal attire is encouraged. We kindly ask that our guests refrain from wearing white gowns, as these is reserved for the bride.</p>
   </div>
 </section>
 
@@ -569,12 +557,16 @@
     <p class="gift-msg">The greatest gift is having you celebrate this special day with us. Your love, prayers, and presence are more than enough. However, if you were thinking of blessing us with a gift, a contribution toward our honeymoon fund would be truly appreciated and will help us create unforgettable memories together.</p>
     <div class="gift-cards">
       <div class="gift-card">
-        <h4>Bank Account</h4>
-        <p class="placeholder-note">Bank Account Details: To Follow</p>
+        <h4>GoTyme</h4>
+        <p class="gift-acct-name">Account Name: Nicole Mae Efren</p>
+        <p class="gift-acct-num">GoTyme Account #: 019338239061</p>
+        <img class="qr-img" src="https://ik.imagekit.io/jcsquo5nq/mark%20and%20nicole/gotyme.jpg" alt="GoTyme QR code">
       </div>
       <div class="gift-card">
-        <h4>E-Wallet / QR Code</h4>
-        <div class="qr-box">QR CODE<br>TO FOLLOW</div>
+        <h4>EastWest</h4>
+        <p class="gift-acct-name">Account Name: Nicole Mae Efren</p>
+        <p class="gift-acct-num">EastWest Account #: 2000-5094-5978</p>
+        <img class="qr-img" src="https://ik.imagekit.io/jcsquo5nq/mark%20and%20nicole/eastwest.jpg" alt="EastWest QR code">
       </div>
     </div>
   </div>
@@ -637,7 +629,12 @@
 </section>
 
 <footer>
-  <div class="credit">Crafted with love by <a href="#" target="_blank">Love, Anne</a> &nbsp;|&nbsp; 🌐<a href="https://loveanneofficial.ph" target="_blank">loveanneofficial.ph</a></div>
+  <div class="credit-block">
+    <div>Photography: RED Epic Photo by Carlo Cañete Dilla</div>
+    <div>Videography: Emotions by Jack Casas</div>
+    <div>Coordinated by: Club 1990 Events &amp; Concepts | Clubby Aggy</div>
+    <div>Website by <a href="#" target="_blank">Love, Anne</a> &nbsp;|&nbsp; 🌐<a href="https://loveanneofficial.ph" target="_blank">loveanneofficial.ph</a></div>
+  </div>
 </footer>
 
 <script>
@@ -695,7 +692,9 @@
   photoSections.forEach((sec, i)=>{
     sec.style.backgroundImage = `url('${shuffledPool[i % shuffledPool.length]}')`;
   });
-  navLinksEl.style.backgroundImage = `url('${shuffledPool[Math.floor(Math.random() * shuffledPool.length)]}')`;
+  if (window.innerWidth <= 860) {
+    navLinksEl.style.backgroundImage = `url('${shuffledPool[Math.floor(Math.random() * shuffledPool.length)]}')`;
+  }
 
   // Countdown to Oct 23, 2026 4:00 PM Philippine Time (UTC+8)
   const target = new Date('2026-10-23T04:00:00+08:00').getTime();
